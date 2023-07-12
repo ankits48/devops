@@ -1,0 +1,36 @@
+// To access cluster on local machine:
+aws configure : access key and secreat key enter
+aws eks --region us-east-1 describe-cluster --name ed-eks-01 --query cluster.status
+aws eks --region us-east-1 update-kubeconfig --name bluebook-stage
+
+kubectl installation:
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+kubectl version --short --client
+
+
+
+
+// nodes groups policy: 
+AmazonEKS_CNI_Policy
+AmazonEKSWorkerNodePolicy
+AmazonEC2ContainerRegistryReadOnly
+
+
+https://www.youtube.com/watch?v=DcnviAwmzM4
+ 	
+* public subnet : A subnet which have access to outside vpc through (internet gateway) with help of route table
+* private subnet : A subnet which doesnot have access to outside vpc 
+
+how to create custom vpc :
+1. create vpc 
+2. create subnet 
+3. create internet gateway
+4. create route table 
+
+
+* NAT gateway
+
+create nateway in public subnet 
+then in private subnet define route table value(private subnet) to nat gateway.

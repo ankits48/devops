@@ -1,0 +1,63 @@
+CKA: TIPS AND TRICKS
+
+https://killercoda.com/
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+1. Alias k=kubectl
+   k get pods
+2. kubctl run nginx --image=nginx --dry-run=client -oyaml > test.yaml
+   vi test.yaml
+3. kubectl create deploy test --image=ngnix -- replicas 2
+4. kubectl scale deploy test --replicas 3
+5. kubectl expose pod nginx --type NodePort --port 80
+
+
+alias k='kubectl '
+alias krep='k replace --force -f'
+alias kdel='k delete --force'
+alias ka='k apply -f'
+alias kc='k create'
+alias kdn='k describe no'
+alias kr='k run --image'
+alias kcd='k create deploy --image'
+alias kgp='k get po -o wide'
+alias kep='k edit po'
+alias kdp='k describe po'
+alias kgd='k get deploy -o wide'
+alias ked='k edit deploy'
+alias kdd='k describe deploy'
+alias kgs='k get svc -o wide'
+alias kes='k edit svc'
+alias kds='k describe svc'
+alias kgn='k get no -o wide'
+alias ken='k edit no'
+export $do='---dry-run=client -o=yaml'
+export $n='-n kube-system'
+
+
+kubernetes components:
+
+control plane node
+
+1. scheduler : try to find the best fit node based on taints/tolerations, afinity ndoeslector & updates the pod spec with node
+2. controller manager : make sure actual state = desired state any issue tell api server what to do
+   replicaset deployment job statefulset daemonset
+3. api server : user is authenticated with the headers passed authorized using rbac webhooks to validate or mutate save to etcd
+4. etcd : key value store for distributed systems api server writes to it in HA 3 etcd node where 1 is leader raft alog(leader election) 2n+1
+
+worker nodes:
+
+1. kube-proxy: kube-proxy maintains network rules on nodes. these network rules allow network communication to your pods from network sessions inside or outside of 
+iptables or ipvs: every time a pod is created the ip tables is handled by kube-proxy
+2. kubelet : 
+3. containerd : CRI , CNI: flannel, calico, cilium. CSI: longhorn, openEBS.
+
+kubectl commands:
+
+1. kubectl get nodes
+2. kubectl get pods -A : to get all pods
+3. kubectl get pods -A -owide : to find out a pod is running in which node.
+4. kubctl run nginx --image=nginx --dry-run=client -oyaml > test.yaml
+5. kubectl get ns
+6. kubectl get cm -n kube-public
+7. kubectl get lease -n kube-node-lease

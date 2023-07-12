@@ -1,0 +1,22 @@
+Our graduated projects:
+
+argo: continous integration & deliveryt
+containerd: Container Runtime
+CoreDNS: Coordination & Service Discovery
+envoy: Service Proxy
+etcd: Coordination & Serivce Discovery
+fluentd: Logging
+flux: Continous integration & delivery
+harbor: Container Registry
+helm: application definition & image build
+jaeger: tracing
+kubernetes: scheduling & orchestration
+linkerd: Service Mesh
+Open policy agent: security & compliance
+Prometheus: Monitoring
+Rook: Cloud native storage
+spiffe: key management
+spire: key management
+tuf: security & compliance
+tikv: database
+vitess: database

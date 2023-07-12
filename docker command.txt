@@ -1,0 +1,129 @@
+***SCRIPT TO INSTALL DOCKER ENGINE IN LINUX**
+install docker engine in linux using script
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh
+**** BASIC DOCKER COMMANDS ***
+docker commands:
+1. docker run nginx // start the containers
+2. docker ps // list containers
+3. docker ps -a // list all container
+4. docker stop <name> // stop container
+5. docker rm <name> // remove a container
+6. docker images // list images
+7. docker rmi <image name> // remove an images
+8. docker pull nginx // download an image
+9. docker exec distracted_mcclinktock cat /etc/hosts // execute a command in a running container
+10. docker run -d kodekloud/simple-webapp // detach mode
+11. docker attach <container id> // attach a running container 
+
+*** Docker File instructions **
+
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json .
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD [ "node","/app/src/index.js" ]
+
+create image from docker file
+
+docker build -t [name]:[tag] [dockerfile-path]
+
+run a container
+
+docker run -dp publicPort:privatePort [image name]
+
+docker run -it --name containerName myimage /bin/bash
+push to images registry
+*** DOCKER LOGIN ***
+docker login
+docker tag local-image:tagname new-repo:tagname
+docker push new-repo:tagname
+
+
+docker volumes
+from ubuntu
+volume ["/myvolumes"]
+sharing volumes
+
+docker run -it --name container2 --priviledged=true --volumes from container1 ubuntu /bin/bash
+
+
+*** Docker compose ***
+
+docker run -d --name=redis redis
+docker run -d --name=db postgress:9.4
+docker run -d --name=vote -p 5000:80 --link redis:redis voting-app // creating a link between two containers redis container with : host looking for connections;
+docker run -d --name=result -p 5001:80 --link db:db result-app
+docker run -d --name=worker --link db:db --link redis:redis worker
+
+docker-compose.yaml file
+version 1
+redis:
+  image: redis
+db:
+  image: postgres:9.4
+vote:
+  build: ./vote or image: voting-app
+  ports:
+    - 5000:80
+  links:
+    - db
+result:
+  image: result-app
+  ports:
+    - 5001:80
+  links:
+    - db
+worker:
+  image: worker
+  links:
+    - redis
+    - db
+*command to deploy multiple containers using compose yaml file : docker-compose up
+docker compose version 2
+version: 2
+Services:
+  redis: 
+    image:
+docker compose version 3
+redis:
+  image: redis
+db:
+  image: postgres:9.4
+vote:
+  build: ./vote or image: voting-app
+  ports:
+    - 5000:80
+  links:
+    - db
+result:
+  image: result-app
+  ports:
+    - 5001:80
+  links:
+    - db
+worker:
+  image: worker
+  links:
+    - redis
+    - db
+verison 3
+
+*** docker storage ***
+/var/lib/docker
+	aufs
+	containers
+	images
+	volumes
+layered architecuture
+*** docker volumes ***
+docker run -v data_volume:/var/lib/mysql mysql
+docker run -v data_volume:/var/lib/mysql mysql
+
+docker run / --mount type=bind,source=/data/mysql,target=/var/lib/mysql mysql
+
+
+  
+

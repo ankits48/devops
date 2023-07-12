@@ -1,0 +1,21 @@
+elastic search : 
+open source analytics and full text serach egine.
+It is build in java 
+easy to use and highly scalable.
+often used to procide search functionality to an application with features like auto completing, correcting tyo
+Elasticsearch is a NoSQL database that is based on the lucene search engine which will helps us to store inputs/logs
+
+kibana : 
+dashboard for analysing and visulaistation 
+which will helps developer to monitor application logs
+
+logstack :
+1. proces logs from applications and send them to elastic serach. but over the time it has evoloed
+2. logstach is a free and open server side data processing pipeline that ingests data from a mulititdue 
+3. logstash is a log pipeline tool that accepts inputs/logs from various sources, & exports the data to various targets.
+example :
+
+new line log file event -> logstash -> kafka/elastic serach.
+
+
+* log -> data processing(logstash) -> storage(elasticserach) -> visualize(kibana) 

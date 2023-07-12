@@ -1,0 +1,116 @@
+* To get no. of pods running
+
+kubectl get pods
+
+yaml file pods,serivce etc contain following 
+
+pod configuration file
+
+apiVersion: 
+	pods v1
+	service v1
+	replicaset apps/v1
+	deployment apps/v1
+
+kind:
+	type of object like pods,service,etc
+
+metadata:
+	name: name of pod
+	labels: 
+		app: myapp
+		type: front-end ,backend etc
+
+spec:
+
+example
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    tier: frontend
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+
+kubectl apply -f pod.yaml 
+
+replicaset configuration file:
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: mywebsite
+    tier: frontend
+spec:
+  replicas: 4
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+  selector:
+    matchLabels:
+      app: myapp
+
+kubectl create -f replicaset.yaml
+kubectl get replicaset
+kubectl get pods
+
+deployment configuration file
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: mywebsite
+    tier: frontend
+spec:
+  replicas: 4
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+  selector:
+    matchLabels:
+      app: myapp
+kubectl create -f deployement.yaml
+
+update and rollback
+kubectl rollback status deployment/web=appp
+
+service-definition.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30008
+  selector:
+    app: myapp
+    type: front-end
+
+kubectl create -f service-definition.yml
+kubectl get services

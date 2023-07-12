@@ -1,0 +1,62 @@
+1. create 3 mongo servers. // 1 primary and 2 secondary
+2. allow port 27017 for all tcp connections
+3. edit vim /etc/mongod.conf
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+
+security:
+  authorization: enabled
+  keyFile: /var/log/mongodb/keyfile.txt
+
+replication:
+  replSetName: "rs1"
+
+
+4. rs.initiate();
+5. rs.add("ip address")
+6. check by rs.status()
+
+7. rs.slaveOk() // read operations on secondary members
+
+// mongodb security.KeyFile issue resovled. 
+
+1. create a file with command  "sudo openssl rand -base64 768 > keyfile.txt" in /var/monogodb/mongod
+
+2. chmod 400 keyfile.txt
+
+3. sudo chown mongodb:mongodb /var/monogodb/mongod/keyfile.txt.
+
+4. security:
+     authorization: enabled
+     keyFile: /var/log/mongodb/keyfile.txt
+
+5. restart mongodb server (sudo systemctl restart mongod)
+
+6. check mongodb status (sudo systemctl status mongod)
+
+7. copy same keyfile.txt and paste in same location on other servers (keyfile.txt should be same on other servers. do not generate keyfile again) and follow the steps 2 to 6. 
+
+
+// mongodb installation command
+sudo apt-get install gnupg
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \
+   --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+echo "mongodb-org hold" | sudo dpkg --set-selections
+echo "mongodb-org-database hold" | sudo dpkg --set-selections
+echo "mongodb-org-server hold" | sudo dpkg --set-selections
+echo "mongodb-mongosh hold" | sudo dpkg --set-selections
+echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
+echo "mongodb-org-tools hold" | sudo dpkg --set-selections
+
+
+rs.remove("172.31.90.124:27017")
+rs.remove("172.31.85.67:27017")
+

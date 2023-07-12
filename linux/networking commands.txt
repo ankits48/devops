@@ -1,0 +1,1 @@
+1. ifconfig : Kernal links up the software side to the hardware side using a network interface; using this command you can configure them.

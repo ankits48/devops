@@ -1,0 +1,30 @@
+linux commands
+
+1. ls: list information about the files
+2. mkdir: creating a new directory
+3. cd: changing the directory
+4. touch: create an empty file
+5. vi: text editor
+6. cat: reading the files sequentially 
+7. cp: copy command
+8. mv: move command
+9. chmod: change the file permissions // 400 read only and +x executable mode
+10. kill: killing the process
+11. env: getting the list of envirnoment variables
+12. export: exporting the variables
+13. curl: transfer data from or to a server
+14. tar: archive utility
+15. du: disk usage command
+16. ping: network connectivity
+17. netstat: network statistics to monitor network connections
+18. nslookup: name server lookup
+19. ps: process status
+20. tail: print last N lines of a file
+21. systemctl: to control services
+22. journalctl: view systemd logs
+23. top: memory and cpu utilation view
+24. pwd: present working directory
+25. > : add contents to file
+26. cat: view contents of file
+27. touch : create a new file(no contents)
+28. 

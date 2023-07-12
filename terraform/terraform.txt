@@ -1,0 +1,17 @@
+terraform commands:-
+
+1. TF INIT
+2. TF PLAN: the terraform plan command is used to create an execution plan terraform performs a refresh unless explicity deabled and then determeines what actions are necessary to achiever the desired state specified in the configuration files.
+3. TF VALIDATE
+4. TF APPLY : the terraform apply command is used to apply the changes required to reach the desired state of the configuration or the predetermeined set of acgtion genereted by a terraform plan execution plan.
+5. TF DESTROY : the terraform destroy command is used to destroy the terraform manged infrastuctive
+
+create vpc
+create extra subnet for kubernets
+create ec2 instance
+create security groups for kubernetes
+create iam roles
+create iam policies
+attach roles
+create eks cluster
+create node group
